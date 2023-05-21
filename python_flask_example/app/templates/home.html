@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Flask</title>
+    <strong
+      ><link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/main.css') }}"
+    /></strong>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1 class="logo">Flask App</h1>
+      </div>
+    </header>
+
+    <div class="container">안녕하세요.</div>
+<<<<<<< HEAD
+    <a href="/graph">간단 그래프 예제</a>
+=======
+    {% if template_variable == "Hello" %}
+    <p>{{ template_variable }}, World!</p>
+    {% endif %}
+
+    <ul>
+      {% for x in range(10) %}
+      <li>{{ x }}</li>
+      {% endfor %}
+    </ul>
+>>>>>>> 0420cdb921bf06bf326ff88b0bb402ffeff58736
+  </body>
+</html>
