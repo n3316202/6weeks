@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-from flask import Flask, render_template , request
-from  model.study import Grade ,VisualEx
 
-=======
-from flask import Flask, render_template ,url_for
->>>>>>> 0420cdb921bf06bf326ff88b0bb402ffeff58736
+from flask import Flask, render_template , request, url_for
+from  model.study import Grade ,VisualEx
 
 
 app = Flask(__name__)
@@ -27,7 +23,7 @@ with app.test_request_context():
     print(url_for('login', next='/'))
     print(url_for('profile', username='John Doe'))
 
-<<<<<<< HEAD
+
 @app.route('/grade_view')
 def grade_view():
     return render_template('grade.html')
@@ -52,7 +48,4 @@ def graphExample():
 
 if __name__ == '__main__':
     app.run(debug=True)
-=======
-if __name__ == '__main__':
-    app.run(debug = True)
->>>>>>> 0420cdb921bf06bf326ff88b0bb402ffeff58736
+
