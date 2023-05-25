@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>모든 고객 입니다</h2>
+    <table border="1">
+      <tr>
+        <td>아이디</td>
+        <td>이름</td>
+        <td>이메일</td>
+        <td>삭제</td>
+      </tr>
+      {% for index, row in df.iterrows() %}
+      <tr>
+        <td>{{ row['id'] }}</td>
+        <td>{{ row['name'] }}</td>
+        <td>{{ row['email'] }}</td>
+
+        <td><a href="{{ url_for('customer_delete',bid=row['id']) }}"><button id='{{row['id']}}'>삭제</button></a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

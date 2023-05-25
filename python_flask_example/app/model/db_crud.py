@@ -55,6 +55,27 @@ class DBExample:
         print(cursor.rowcount, "record inserted")
         conn.close()
 
+    def delete_customers(self,id): 
+        conn = pymysql.connect(
+            user="root",
+            password="1234",
+            host="3.37.128.156", #localhost
+            port=3306,
+            database="scott"    
+        )
+        # 커서 객체 생성
+        cursor = conn.cursor()
+
+        print(id)
+
+        sql = "delete from customers where id = %s"
+        val = (id)
+        cursor.execute(sql, val)
+
+        conn.commit()
+        print(cursor.rowcount, "record inserted")
+        conn.close()
+
   
 
     
