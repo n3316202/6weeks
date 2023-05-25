@@ -1,6 +1,8 @@
 
 from flask import Flask, render_template , request, url_for
 from  model.study import Grade ,VisualEx
+from  model.db_crud import DBExample
+
 
 
 app = Flask(__name__)
@@ -45,6 +47,29 @@ def grade():
 def graphExample():
     visualEx = VisualEx()
     return render_template('visual_example.html',plot_url = visualEx.basic_example())
+
+@app.route('/show_table')
+def show_table():
+    db_example = DBExample()
+    db_example.show_table()
+    df = db_example.select_customers()
+    print(df)
+    return df.to_html(index=False)
+
+
+@app.route('/customer_view')
+def customer_view():
+    return render_template('customer.html')
+
+@app.route('/customer_insert')
+def customer_insert():
+    name = request.values.get("name")
+    email = request.values.get("email")
+
+    db_example = DBExample()
+    db_example.insert_customers(email=email,name=name)
+    return db_example.select_customers().to_html(index=False)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
