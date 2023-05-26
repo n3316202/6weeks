@@ -31,13 +31,17 @@ def grade_view():
 
 @app.route('/grade')
 def grade():
-    kor = request.values.get("kor")
-    eng = request.values.get("eng")
-    math = request.values.get("math")
-    total = int(kor) + int(eng) + int(math)
-    avg = int(kor) + int(eng) + int(math) / 3.0
-    grade = Grade(int(kor) , int(eng) , int(math))
-
+    
+    try:        
+        kor = request.values.get("kor")
+        eng = request.values.get("eng")
+        math = request.values.get("math")
+        total = int(kor) + int(eng) + int(math)
+        avg = int(kor) + int(eng) + int(math) / 3.0
+        grade = Grade(int(kor) , int(eng) , int(math))
+    except :
+        print("에러발생")
+        return redirect(url_for('grade_view'))
     #return render_template('grade_result.html',total=total, avg=avg)
     return render_template('grade_result.html',grade=grade)
 
@@ -53,7 +57,6 @@ def show_table():
     df = db_example.select_customers()
     print(df)
     return df.to_html(index=False)
-
 
 @app.route('/customer_insert_view')
 def customer_insert_view():
@@ -74,7 +77,6 @@ def customer_insert():
 def customer_delete():
     id = request.values.get("bid")
 
-
     db_example = DBExample()
     db_example.delete_customers(id=id)
 
@@ -85,7 +87,7 @@ def customer_delete():
 def customer_view():
 
     db_example = DBExample()
-    return render_template('customers_view.html',df=db_example.select_customers())
+    return render_template('customers_view.html', df=db_example.select_customers())
 
 
 if __name__ == '__main__':
