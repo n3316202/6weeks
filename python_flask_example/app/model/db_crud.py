@@ -4,7 +4,7 @@ import pandas as pd
 
 class DBExample:
 
-    def show_table(self):    
+    def connetion(self):
         conn = pymysql.connect(
             user="root",
             password="1234",
@@ -12,6 +12,11 @@ class DBExample:
             port=3306,
             database="scott"    
         )
+        return conn 
+        
+    def show_table(self):    
+
+        conn = self.connetion()
 
         sql = 'SHOW TABLES'
 
@@ -23,25 +28,15 @@ class DBExample:
 
 
     def select_customers(self): 
-        conn = pymysql.connect(
-            user="root",
-            password="1234",
-            host="3.37.128.156", #localhost
-            port=3306,
-            database="scott"    
-        ) 
+        conn = self.connetion()
+        
         df = pd.read_sql_query("SELECT * FROM customers", conn)
         print(df) 
         return df
     
     def insert_customers(self,name,email): 
-        conn = pymysql.connect(
-            user="root",
-            password="1234",
-            host="3.37.128.156", #localhost
-            port=3306,
-            database="scott"    
-        )
+        conn = self.connetion()
+        
         # 커서 객체 생성
         cursor = conn.cursor()
 
@@ -56,13 +51,9 @@ class DBExample:
         conn.close()
 
     def delete_customers(self,id): 
-        conn = pymysql.connect(
-            user="root",
-            password="1234",
-            host="3.37.128.156", #localhost
-            port=3306,
-            database="scott"    
-        )
+        
+        conn = self.connetion()
+        
         # 커서 객체 생성
         cursor = conn.cursor()
 
@@ -76,7 +67,7 @@ class DBExample:
         print(cursor.rowcount, "record inserted")
         conn.close()
 
-  
+
 
     
     

@@ -3,13 +3,11 @@ from flask import Flask, render_template , request, url_for,redirect
 from  model.study import Grade ,VisualEx
 from  model.db_crud import DBExample
 
-
-
 app = Flask(__name__)
 
 @app.route('/')
 def index(): 
-    pass
+    return render_template('home.html')
 
 @app.route('/login')
 def login(): 
@@ -57,9 +55,9 @@ def show_table():
     return df.to_html(index=False)
 
 
-@app.route('/customer_view')
-def customer_view():
-    return render_template('customer.html')
+@app.route('/customer_insert_view')
+def customer_insert_view():
+    return render_template('customer_insert.html')
 
 @app.route('/customer_insert')
 def customer_insert():
@@ -80,8 +78,15 @@ def customer_delete():
     db_example = DBExample()
     db_example.delete_customers(id=id)
 
+    #return render_template('customers_view.html',df=db_example.select_customers())
+    return redirect(url_for('customer_view'))
+
+@app.route('/customer_view')
+def customer_view():
+
+    db_example = DBExample()
     return render_template('customers_view.html',df=db_example.select_customers())
-    #return redirect(url_for('customer_view'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)
